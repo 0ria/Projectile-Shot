@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Oria </title>
+    <link rel="FaviconIcon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="styles/indexMain.css">
+  </head>
+<body>
+  <ul>
+    <li><a href="index.html">Index</a></li>
+    <li><a href="Daniel-Oria-Martin-Tiro.html">Tiro Parabólico</a></li>
+    <li><a href="./out/index.html">Documentation</a></li>
+    <li><a href="Daniel-Oria-Martin-test.html">Tests</a></li>
+    <li><a href="./coverage/index.html">Coverage</a></li>
+    <li><a href="Daniel-Oria-Martin-uml.html">UML</a></li>
+    <li><a href="Daniel-Oria-Martin-ejercicio.html"> Ejercicio </a></li>
+  </ul>
+
+  <h1> Tiro Parabólico - Daniel Oria Martín </h1>
+  <div id="container">
+    <canvas id="myCanvasRight" width="1100" height="800"></canvas>
+    <canvas id="myCanvasLeft" width="500" height="300"></canvas>
+    <div id="buttons">
+      <label for="velocity">Velocidad Inicial:</label>
+      <input type="text" id="velocity" name="velocity" value="100" required><br><br>
+      <label for="angle">Ángulo:</label>
+      <input type="text" id="angle" name="angle" value="70" required><br><br>
+      <label for="angle">Altura inicial:</label>
+      <input type="text" id="height" name="height" value="0" required><br><br>
+      <label for="show">Dibujar la trayectoria</label>
+      <input type="checkbox" id="show" Checked><br><br>
+      <input type="submit" onclick="main()">
+    </div>
+    <script src="axesClass.js"></script>
+    <script src="projectileCalculationClass.js"></script>
+    <script src="projectileMotion.js"></script>
+  </div>
+</body>
+
+</html>

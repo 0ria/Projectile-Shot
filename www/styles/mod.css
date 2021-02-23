@@ -1,0 +1,83 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  background: white;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+a, a:visited, a:active {
+  font-size: 115%;
+  color: #7dcaee;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/*
+#container {
+  position: relative;
+  border:1 px solid gold;
+  width: 800px;
+  height: 400px;
+}
+#myCanvasRight{
+  position:absolute;
+  left:520px; 
+  border: 2.5px solid black;
+  margin-bottom: 1rem;
+  padding: 0;
+  margin: 0 auto;
+}
+#myCanvasLeft{
+  position:absolute;
+  left:0;
+  border: 2.5px solid black;
+  margin-bottom: 1rem;
+  padding: 0;
+  margin: 0 auto;
+}*/
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+
+canvas {
+background: white;
+border: 2.5px solid black;
+margin: 0;
+padding: 0;
+margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

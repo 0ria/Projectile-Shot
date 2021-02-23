@@ -1,0 +1,34 @@
+{
+  "name": "pai-p10-projectile-0ria",
+  "version": "1.0.0",
+  "description": "This directory is organised as follows:",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter=html npm test",
+    "test:watch": "mocha --watch",
+    "start": "node web-server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-INF-PAI-2019-2020/pai-p10-projectile-0ria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-INF-PAI-2019-2020/pai-p10-projectile-0ria/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-INF-PAI-2019-2020/pai-p10-projectile-0ria#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

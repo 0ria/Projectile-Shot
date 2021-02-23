@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title> Oria </title>
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="/mocha/mocha.css" />
+    <link rel="stylesheet" type="text/css" href="styles/navbar.css">
+    <ul id="nav">
+      <li><a href="index.html">Index</a></li>
+      <li><a href="Daniel-Oria-Martin-Tiro.html">Tiro Parabólico</a></li>
+      <li><a href="./out/index.html">Documentation</a></li>
+      <li><a href="Daniel-Oria-Martin-test.html">Tests</a></li>
+      <li><a href="./coverage/index.html">Coverage</a></li>
+      <li><a href="Daniel-Oria-Martin-uml.html">UML</a></li>
+      <li><a href="Daniel-Oria-Martin-ejercicio.html"> Ejercicio </a></li>
+    </ul>
+    <h1> Daniel Oria Martín - Tests </h1>
+    <h1>Mocha Tests</h1>
+    <div id="mocha"></div>
+    <script src="mocha/mocha.js"></script>
+    <script src="chai/chai.js"></script>
+    <script>
+      mocha.setup("bdd");
+    </script>
+
+    <script src="axesClass.js"></script>
+    <script src="projectileCalculationClass.js"></script>
+    <script src="projectileMotion.js"></script>
+    <script src="classesTests.js"></script>
+
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>

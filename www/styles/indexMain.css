@@ -1,0 +1,98 @@
+h1 {
+    text-align: center;
+    font-size: 150%;
+    color: rgb(94, 3, 3);
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 130%;
+    color: rgb(94, 3, 3);
+  }
+  
+  a, a:visited, a:active {
+    font-size: 115%;
+    color: #7dcaee;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  p {
+    text-align: center;
+    display: block;
+  }
+  
+  body {
+    background: white;
+    text-align: center;
+    color: black;
+  }
+  /*
+  canvas {
+    background: white;
+    border:3px solid black;
+    padding: 0;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    display: block;
+  }
+*/
+#container {
+  position: relative;
+  border:1 px solid gold;
+  width: 800px;
+  height: 400px;
+}
+#myCanvasRight{
+  position:absolute;
+  left:520px; 
+  border: 2.5px solid black;
+  margin-bottom: 1rem;
+  padding: 0;
+  margin: 0 auto;
+}
+#myCanvasLeft{
+  position:absolute;
+  left:0;
+  border: 2.5px solid black;
+  margin-bottom: 1rem;
+  padding: 0;
+  margin: 0 auto;
+}
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  #buttons {
+    position: relative;
+    border: 2px solid black;
+    width: 500px;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #111;
+  }
+  
+  .btn-group {
+      text-align: center;
+  }

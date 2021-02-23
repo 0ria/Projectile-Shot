@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: projectileCalculationClass.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: projectileCalculationClass.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @author Daniel Oria Martin
+ * @mail alu0101027340@ull.edu.es
+ * @date 26/04/2020
+ * GitHub User: 0ria
+ * Location: Escuela Superior Técnica de Ingenieria de La Laguna
+ * Subject: Programacion de Aplicaciones Interactivas
+ * Assignment: Práctica 10, Projectile Motion.
+ * Task: projectileCalculation
+ * @brief programa que contiene la clase ProjectileCalculation la cual dados unos parámetros
+ *     especificados por el usuario calculará los valores del tiro parabólico, pintará a uno
+ *     de los canvas la trayectoria y pintará en el otro canvas los resultados del tiro
+ * References:  Tasks:
+ *              https://github.com/fsande/PAI-P10-Projectile/blob/master/2019-2020_p10_Projectile.md.
+ */
+'use strict';
+
+/**
+ * @class Class ProjectileCalculation 
+ * @description Esta clase calcula los resultados referidos a cada tiro parabólico haciendo uso de 
+ *    los datos de entrada proporcionados por el usuario y pinta la trayectoria en la gráfica.
+ */
+class ProjectileCalculation {
+  /**
+   * 
+   * @param {Number} velocity Velocidad inicial que tendrá el proyectil
+   * @param {Number} angle Ángulo inicial desde el cuál se lanzará
+   * @param {boolean} checked Booleano el cual si está a true hará que el tiro se pinte al canvas
+   * @param {Number} height Altura inicial desde la cuál se lanza el proyectil
+   */
+  constructor(velocity, angle, checked, height = 0) {
+    this.initialVelocity = velocity;
+    this.initialAngle = angle;
+    this.isChecked = checked;
+    this.gravity = 9.81;
+    this.initialHeight = height;
+  }
+  /**
+   * @description Método que pinta en el canvas los resultados del tiro realizado
+   */
+  printElements() {
+    CTXL.font = "20px Arial";
+    CTXL.clearRect(0, 0, CANVASLEFT.width, CANVASLEFT.height);
+    CTXL.fillText("Max height: " + this.maxHeight.toFixed(3) + " meters", 10, 200);
+    CTXL.fillText("Time to reach max height: " + this.timeToReachMaxHeight.toFixed(3) + " seconds", 10, 230);
+    CTXL.fillText("Total width reach: " + this.totalReach.toFixed(3) + " meters", 10, 260);
+    CTXL.fillText("Time to reach max width: " + this.finalTime.toFixed(3) + " seconds", 10, 290);
+  }
+  /**
+   * @description Método que calcula:
+   *     - Altura Máxima alcanzada
+   *     - Tiempo en alcanzar altura máxima
+   *     - Total recorrido hasta tocar el suelo
+   *     - Tiempo en alcanzar el total recorrido
+   *     Siguiendo las ecuaciones del movimiento rectilínea uniformemente acelerado
+   */
+  calculateElements() {
+    this.timeToReachMaxHeight = (this.initialVelocity * Math.sin(this.initialAngle * Math.PI / 180)) / this.gravity;
+    this.maxHeight = this.initialHeight + this.initialVelocity * this.timeToReachMaxHeight * 
+        Math.sin(this.initialAngle * Math.PI / 180) - 0.5 * this.gravity * Math.pow(this.timeToReachMaxHeight, 2);
+    this.finalTime = (this.initialVelocity * Math.sin(this.initialAngle * Math.PI / 180)) / (this.gravity / 2);
+    this.totalReach = this.initialHeight + this.initialVelocity * Math.cos(this.initialAngle * Math.PI / 180) * this.finalTime;
+    this.printElements();
+  }
+  /**
+   * @description Método que elige un color aleatorio con el que se pintará el tiro en el canvas
+   */
+  selectRandomRGBColor() {
+    const MINCOLORVALUE = 0;
+    const MAXCOLORVALUE = 254;
+    let r = Math.random() * (MAXCOLORVALUE - MINCOLORVALUE) + MINCOLORVALUE;
+    let g = Math.random() * (MAXCOLORVALUE - MINCOLORVALUE) + MINCOLORVALUE;
+    let b = Math.random() * (MAXCOLORVALUE - MINCOLORVALUE) + MINCOLORVALUE;
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+  /**
+   * 
+   * @param {Array} array Array que contiene la trayectoria del proyectil
+   * @param {String} color Color del que se pintará el tiro
+   * @description Método que pinta en el canvas el tiro previamente calculado
+   */
+  async draw(arrayPoints, color) {
+    for(let i = 0; i &lt; arrayPoints.length; i++) {
+      await sleep(25);
+      CTXR.fillStyle = color;
+      CTXR.beginPath();
+      CTXR.arc(arrayPoints[i][0], arrayPoints[i][1], 5, 0, Math.PI * 2);
+      CTXR.fill();
+    }
+    /*CTXR.beginPath();
+    CTXR.moveTo(array[0][0], array[0][1]);
+    CTXR.setLineDash([5, 15]);
+    CTXR.quadraticCurveTo(array[1][0], array[1][1] - array[1][1] * 0.25, array[2][0], array[2][1]);
+    //CTXR.arc(array[0][0], array[0][1], array[1][0], this.initialAngle * Math.PI / 180, Math.PI * 2);
+    CTXR.stroke();*/
+  }
+  /**
+   * 
+   * @param {Number} width Ancho del cavnas 
+   * @param {Number} height Alto del canvas
+   * @description Método que calcula la posición del tiro en distintos instantes del tiempo,
+   *     la almacena en un array y la manda a pintar al método draw()
+   */
+  printArc(width, height) {
+    let offsetX = width * 0.05;
+    let offsetY = height * 0.075;
+    const TIMEITERATOR = 0.25;
+    let time = 0;
+    let trajectoryArray = [];
+    let x = Math.round(this.initialVelocity * Math.cos(this.initialAngle * Math.PI / 180) * this.timeToReachMaxHeight);
+    let y = Math.round(this.initialHeight + this.initialVelocity * Math.sin(this.initialAngle * Math.PI / 180) * this.timeToReachMaxHeight -
+    (this.gravity * Math.pow(this.timeToReachMaxHeight, 2)) / 2);
+    let initalPoint = [offsetX, height - offsetY - this.initialHeight];
+    let maxHeightPoint = [x + offsetX, height - offsetY - y];
+    let lastPoint = [this.totalReach + offsetX, height - offsetY];
+    trajectoryArray.push(initalPoint);
+    trajectoryArray.push(maxHeightPoint);
+    trajectoryArray.push(lastPoint);
+    
+    if (this.isChecked == true) {
+      while (height - offsetY - y &lt; height - offsetY) {
+        time += TIMEITERATOR;
+        x = Math.round(this.initialVelocity * Math.cos(this.initialAngle * Math.PI / 180) * time);
+        y = Math.round(this.initialHeight + this.initialVelocity * Math.sin(this.initialAngle * Math.PI / 180) * time -
+        (this.gravity / 2) * Math.pow(time, 2));
+        let point = [x + offsetX, height - offsetY - y];
+        trajectoryArray.push(point);
+      }
+      if (trajectoryArray[trajectoryArray.length - 1][1] > height - offsetY) {
+        trajectoryArray.pop();
+      }
+    }
+    this.draw(trajectoryArray, this.selectRandomRGBColor());
+  }
+}
+/**
+ *
+ * @param {Number} msToWait
+ * @description Función que hace que el programa espere el tiempo indicado
+ */
+function sleep(msToWait) {
+  return new Promise(resolve => setTimeout(resolve, msToWait));
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Axis.html">Axis</a></li><li><a href="Line.html">Line</a></li><li><a href="Plane.html">Plane</a></li><li><a href="ProjectileCalculation.html">ProjectileCalculation</a></li></ul><h3>Global</h3><ul><li><a href="global.html#main">main</a></li><li><a href="global.html#sleep">sleep</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Apr 28 2020 20:34:08 GMT+0100 (WEST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
